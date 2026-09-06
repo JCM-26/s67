@@ -55,11 +55,12 @@
         router.push({ path: `/courses/${courseId}/edit` });
     }
 
-    // DELETE request (via fetch) to archive the course, the course id is passed in the route params
+    // PATCH request (via fetch) to archive the course, the course id is passed in the route params
+    // (the demo-API registers this route as PATCH, not DELETE)
     async function handleArchive(courseId) {
         try {
             const response = await fetch(`${import.meta.env.VITE_COURSE_BOOKING_API}/courses/${courseId}/archive`, {
-                method: "DELETE",
+                method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 }

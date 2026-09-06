@@ -53,9 +53,10 @@
         };
 
         try {
-            // PUT request to update the course, courseId comes from the route params,
+            // PATCH request to update the course, courseId comes from the route params,
+            // (the demo-API registers this route as PATCH, not PUT)
             // the token is added to the headers automatically by the api instance
-            const response = await api.put(`/courses/${courseId}`, course, {
+            const response = await api.patch(`/courses/${courseId}`, course, {
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 }
