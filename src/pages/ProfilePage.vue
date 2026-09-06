@@ -3,6 +3,7 @@
 	import { useRouter } from "vue-router";
 	import { useGlobalStore } from "../stores/global.js";
 	import ResetPassword from "../components/ResetPassword.vue";
+	import UpdateProfile from "../components/UpdateProfile.vue";
 
 	const { user } = useGlobalStore();
 
@@ -29,6 +30,8 @@
 				</ul>
 			</div>
 		</div>
+		<!-- Add update profile component -->
+		<UpdateProfile />
 		<!-- Add reset password component -->
 		<ResetPassword />
 	</div>

@@ -18,6 +18,7 @@ import ProfilePage from './pages/ProfilePage.vue';
 import ViewCourse from './pages/ViewCourse.vue';
 /* ACTIVITY SOLUTION START */
 import AddCourse from "./pages/AddCourse.vue";
+import EditCourse from "./pages/EditCourse.vue";
 /* ACTIVITY SOLUTION END */
 
 /*
@@ -87,6 +88,11 @@ const router = createRouter({
 		path: "/addCourse",
 		name: "AddCourse",
 		component: AddCourse
+		},
+		{
+		path: "/courses/:courseId/edit",
+		name: "EditCourse",
+		component: EditCourse
 		},
 		/* ACTIVITY SOLUTION END */
 		{

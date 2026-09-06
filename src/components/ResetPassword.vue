@@ -4,31 +4,6 @@
 			<div class="col-md-6">
 				<div class="card shadow-sm">
 					<div class="card-body">
-						<h3 class="card-title mb-4">Update Profile</h3>
-						<form @submit.prevent="handleReset">
-							<div class="mb-3">
-
-								<label for="firstName" class="form-label">First Name</label>
-								<input type="password" id="firstName" v-model="newPassword" class="form-control" required>
-
-								<label for="lastName" class="form-label">Last Name</label>
-								<input type="password" id="lastName" v-model="newPassword" class="form-control" required>
-
-								<label for="mobileNo" class="form-label">Mobile No</label>
-								<input type="password" id="mobileNo" v-model="newPassword" class="form-control" required>
-
-								<button type="submit" class="btn btn-primary w-100 my-2" :disabled="isLoading">{{ isLoading ? "Updating..." : "Update Profile"}}</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row justify-content-center">
-			<div class="col-md-6">
-				<div class="card shadow-sm">
-					<div class="card-body">
 						<h3 class="card-title mb-4">Reset Password</h3>
 						<form @submit.prevent="handleReset">
 							<div class="mb-3">

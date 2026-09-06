@@ -23,10 +23,10 @@
                     <span v-else class="text-danger">Unavailable</span>
                 </td>
                 <td>
-                    <button class="btn btn-primary">Edit</button>
+                    <button class="btn btn-primary" @click="handleEdit(course._id)">Edit</button>
                 </td>
                 <td>
-                    <button class="btn btn-danger">Archive</button>
+                    <button class="btn btn-danger" :disabled="!course.isActive" @click="handleArchive(course._id)">Archive</button>
                 </td>
             </tr>
         </tbody>
@@ -34,10 +34,49 @@
 </template>
 
 <script setup>
-    import { defineProps } from "vue";
+    import { defineProps, defineEmits } from "vue";
+    import { useRouter } from "vue-router";
+    import { Notyf } from "notyf";
+    import { useGlobalStore } from "../stores/global";
 
     const props = defineProps({
         coursesData: Array,
     });
+
+    // let the parent (CoursesPage) know a course was archived so it can refresh the table
+    const emit = defineEmits(["archived"]);
+
+    const router = useRouter();
+    const notyf = new Notyf();
+    const { user } = useGlobalStore();
+
+    // navigate to the edit page, the course id is passed in the route params
+    function handleEdit(courseId) {
+        router.push({ path: `/courses/${courseId}/edit` });
+    }
+
+    // DELETE request (via fetch) to archive the course, the course id is passed in the route params
+    async function handleArchive(courseId) {
+        try {
+            const response = await fetch(`${import.meta.env.VITE_COURSE_BOOKING_API}/courses/${courseId}/archive`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                notyf.success(data.message || "Course archived successfully");
+                emit("archived");
+            } else {
+                notyf.error(data.message || "Failed to archive course");
+            }
+        } catch (error) {
+            console.error(error);
+            notyf.error("Failed to archive course");
+        }
+    }
 </script>
 <!-- ACTIVITY SOLUTION END -->
